@@ -2,8 +2,8 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "cloudinary",
   "title": "Cloudinary",
-  "description": "Uploads files to Cloudinary",
-  "icon": "command-icon.png",
+  "description": "Upload your clipboard to your Cloudinary account",
+  "icon": "cloudinary-512x512-rounded.png",
   "author": "colbyfayock",
   "owner": "spacejelly",
   "categories": [
@@ -15,7 +15,7 @@
   "commands": [
     {
       "name": "index",
-      "title": "Upload Clipboard to Cloudinary",
+      "title": "Upload Clipboard",
       "description": "Upload image contents from clipboard to Cloudinary.",
       "mode": "view"
     }
