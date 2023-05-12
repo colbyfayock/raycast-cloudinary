@@ -1,40 +1,99 @@
-import { Form, ActionPanel, Action, showToast } from "@raycast/api";
+import { List, ActionPanel, Action, showToast, Toast } from '@raycast/api';
+import { useEffect, useState } from 'react';
 
-type Values = {
-  textfield: string;
-  textarea: string;
-  datepicker: Date;
-  checkbox: boolean;
-  dropdown: string;
-  tokeneditor: string[];
-};
+import { storeClipboardToTemp } from './lib/util';
+import { uploadImage, getImageUrl } from './lib/cloudinary';
 
-export default function Command() {
-  function handleSubmit(values: Values) {
-    console.log(values);
-    showToast({ title: "Submitted form", message: "See logs for submitted values" });
+import type { Asset } from './types/asset';
+
+export default function main() {
+  const [asset, setAsset] = useState<Asset>();
+  const [loading, setLoading] = useState(false);
+
+  const urlOptimized = asset?.public_id && getImageUrl(asset.public_id, {
+    quality: 'auto',
+    fetch_format: 'auto'
+  });
+
+  const urlBackgroundRemoved = asset?.public_id && getImageUrl(asset.public_id, {
+    effect: 'background_removal',
+    quality: 'auto',
+    fetch_format: 'auto'
+  });
+
+  useEffect(() => { 
+    (async function run() {
+      setLoading(true);
+
+      try {
+        const filePath = storeClipboardToTemp();
+        const resource = await uploadImage(filePath);
+        const asset = Object.fromEntries(Object.entries(resource).filter(([key, ]) => key !== 'api_key'));
+        setAsset(asset as Asset);
+      } catch(e) {
+        displayError('Failed to upload clipboard data to Cloudinary');
+      }
+
+      setLoading(false);
+    })()
+  }, []);
+
+  /**
+   * displayError
+   */
+
+  function displayError(message: string) {
+    showToast({
+      style: Toast.Style.Failure,
+      title: 'Error',
+      message: message,
+    });
   }
 
   return (
-    <Form
-      actions={
-        <ActionPanel>
-          <Action.SubmitForm onSubmit={handleSubmit} />
-        </ActionPanel>
-      }
-    >
-      <Form.Description text="This form showcases all available form elements." />
-      <Form.TextField id="textfield" title="Text field" placeholder="Enter text" defaultValue="Raycast" />
-      <Form.TextArea id="textarea" title="Text area" placeholder="Enter multi-line text" />
-      <Form.Separator />
-      <Form.DatePicker id="datepicker" title="Date picker" />
-      <Form.Checkbox id="checkbox" title="Checkbox" label="Checkbox Label" storeValue />
-      <Form.Dropdown id="dropdown" title="Dropdown">
-        <Form.Dropdown.Item value="dropdown-item" title="Dropdown Item" />
-      </Form.Dropdown>
-      <Form.TagPicker id="tokeneditor" title="Tag picker">
-        <Form.TagPicker.Item value="tagpicker-item" title="Tag Picker Item" />
-      </Form.TagPicker>
-    </Form>
+    <>
+      <List isShowingDetail isLoading={loading}>
+        {urlOptimized && (
+          <>
+            <List.Item
+              title="Optimized"
+              icon="url.png"
+              actions={
+                <Actions item={{ content: urlOptimized }} />
+              }
+              detail={
+                <List.Item.Detail markdown={`![Uploaded Image](${urlOptimized})`} />
+              }
+            />
+          </>
+        )}
+        {urlOptimized && urlBackgroundRemoved && (
+          <List.Item
+            title="Background Removed"
+            icon="url.png"
+            actions={
+              <Actions item={{ content: urlBackgroundRemoved }} />
+            }
+            detail={
+              <List.Item.Detail markdown={`![Uploaded Image](${urlOptimized})`} />
+            }
+          />
+        )}
+      </List>
+    </>
+  );
+}
+
+type ActionItem = {
+  item: {
+    content: string;
+  };
+};
+
+function Actions({ item }: ActionItem) {
+  return (
+    <ActionPanel>
+      <Action.CopyToClipboard content={item.content} />
+    </ActionPanel>
   );
 }
