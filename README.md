@@ -2,7 +2,7 @@
 
 Cloudinary utilities available right from your Raycast launcher.
 
-**This plugin is a community library and not officially supported by Cloudinary.**
+**This plugin is a community extension and not officially supported by Cloudinary.**
 
 ## Getting Started
 
