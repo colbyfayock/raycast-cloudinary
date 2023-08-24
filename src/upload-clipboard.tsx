@@ -18,8 +18,8 @@ export default function main() {
       try {
         const { file } = await Clipboard.read();
 
-        if ( typeof file === 'undefined' ) {
-          throw new Error('Missing image data.');
+        if (typeof file === "undefined") {
+          throw new Error("Missing image data.");
         }
 
         const filePath = fileUriToPath(file);
@@ -27,7 +27,7 @@ export default function main() {
         const resource = await uploadImage(filePath);
         setAsset(resource as Asset);
       } catch (e) {
-        console.log(e)
+        console.log(e);
         displayError("Failed to upload clipboard data to Cloudinary");
       }
 
