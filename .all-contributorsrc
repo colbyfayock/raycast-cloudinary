@@ -16,6 +16,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "daniel-shuy",
+      "name": "Daniel Shuy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17351764?v=4",
+      "profile": "https://github.com/daniel-shuy",
+      "contributions": [
+        "infra",
+        "tool"
+      ]
     }
   ],
   "contributorsPerLine": 7,
