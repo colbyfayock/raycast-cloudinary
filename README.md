@@ -1,6 +1,6 @@
 # Raycast Cloudinary
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Cloudinary utilities available right from your Raycast launcher.
@@ -49,6 +49,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://colbyfayock.com/newsletter"><img src="https://avatars.githubusercontent.com/u/1045274?v=4?s=100" width="100px;" alt="Colby Fayock"/><br /><sub><b>Colby Fayock</b></sub></a><br /><a href="https://github.com/colbyfayock/raycast-cloudinary/commits?author=colbyfayock" title="Code">💻</a> <a href="https://github.com/colbyfayock/raycast-cloudinary/commits?author=colbyfayock" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/daniel-shuy"><img src="https://avatars.githubusercontent.com/u/17351764?v=4?s=100" width="100px;" alt="Daniel Shuy"/><br /><sub><b>Daniel Shuy</b></sub></a><br /><a href="#infra-daniel-shuy" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#tool-daniel-shuy" title="Tools">🔧</a></td>
     </tr>
   </tbody>
 </table>
