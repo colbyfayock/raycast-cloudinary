@@ -16,7 +16,6 @@ You'll be asked to provide your Cloudinary Cloud Name, API Key, and API Secret w
 
 > Need help finding them? Watch how here: https://www.youtube.com/watch?v=1SIp9VL5TMo
 
-
 ## Workflows
 
 ### Search
