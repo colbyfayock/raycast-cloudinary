@@ -23,7 +23,7 @@ export function getUploadSuccessItems(asset: Asset) {
       fetch_format: "auto",
     });
     return {
-      title: ratio,
+      title: `Resized to ${ratio}`,
       icon: "url.png",
       assetUrl: ratioUrl,
       previewUrl: ratioUrl,
