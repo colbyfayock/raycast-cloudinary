@@ -6,17 +6,17 @@ import type { Asset } from "../types/asset";
  */
 
 export function getUploadSuccessItems(asset: Asset) {
-  if (typeof asset.public_id !== "string") {
+  if (typeof asset?.public_id !== "string") {
     throw new Error("Failed to get items: Invalid Asset.");
   }
 
-  const optimizedUrl = getImageUrl(asset.public_id, {
+  const optimizedUrl = getImageUrl(asset?.public_id, {
     quality: "auto",
     fetch_format: "auto",
   });
 
   const ratioUrls = ["16:9", "4:3", "3:2", "1:1", "2:3", "3:4", "9:16"].map((ratio) => {
-    const ratioUrl = getImageUrl(asset.public_id, {
+    const ratioUrl = getImageUrl(asset?.public_id, {
       aspect_ratio: ratio,
       crop: "fill",
       quality: "auto",
@@ -48,4 +48,31 @@ export function getUploadSuccessItems(asset: Asset) {
     },
     ...ratioUrls,
   ];
+}
+
+/**
+ * getOtherResolutions
+ *
+ * @param asset
+ * @param optimizedUrl
+ * @returns Array of resolutions
+ */
+export function getOtherResolutions(asset: Asset, optimizedUrl: string) {
+  const ratioUrls = ["16:9", "4:3", "3:2", "1:1", "2:3", "3:4", "9:16"].map((ratio) => {
+    const ratioUrl = getImageUrl(asset.public_id, {
+      aspect_ratio: ratio,
+      crop: "fill",
+      quality: "auto",
+      fetch_format: "auto",
+    });
+    return {
+      title: `Resized to ${ratio}`,
+      icon: "url.png",
+      assetUrl: ratioUrl,
+      previewUrl: ratioUrl,
+      detail: `![Uploaded Image ${ratio}](${ratioUrl})`,
+    };
+  });
+
+  return ratioUrls;
 }
